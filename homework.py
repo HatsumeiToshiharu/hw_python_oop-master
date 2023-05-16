@@ -124,17 +124,22 @@ class Swimming(Training):
                 * self.duration)
 
 
+class WorkoutDoesntExist:
+    pass
+
+
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     type_of_training: dict = {'SWM': Swimming,
                               'RUN': Running,
                               'WLK': SportsWalking}
-    workout_fella: Training = type_of_training[workout_type](*data)
     # fella same as type
-    if not (workout_type, data):
-        print('Данный тип тренировки отсутствует.')
-
-    return workout_fella
+    try:
+        raise Exception("Some exception")
+    except WorkoutDoesntExist:
+        print('Workout does not exist.')
+    else:
+        return workout_fella
 
 
 def main(training: Training) -> InfoMessage:
